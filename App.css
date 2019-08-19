@@ -9,13 +9,13 @@
   color: white;
   flex-direction: row;
   border: 1px solid firebrick;
-  justify-content: space-between
+  justify-content: space-between;
+  
 }
 
 .VariableContainer {
   display: flex;
   margin-top: 5px;
-  border: 1px solid green;
   width: 300px;
   flex: 0 0 auto;
   flex-direction: column;
@@ -24,9 +24,11 @@
 }
 
 .ReportContainer {
-  margin-top: 5px;
-  margin-right: 5px;
-  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  margin-right: 25px;
+  border: 1px solid firebrick;
   box-shadow: 0 5px 8px #ccc;
   width: 595px;
   height: 841.33px;
@@ -39,10 +41,11 @@
 }
 
 .LogoContainer {
-  margin: 1px auto;
-  border: 1px solid green;
+  display: flex;
+  justify-content: center;
   width: 300px;
   font-weight: bold;
+  border-bottom: 1px solid whitesmoke;
 }
 
 .StateSelection {
@@ -50,7 +53,7 @@
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  border: 1px solid purple;
+  border-bottom: 1px solid whitesmoke;
   flex-grow: 5.4;
 }
 
@@ -62,8 +65,6 @@
     color: white;
     font-size: large;
     font-weight: bold;
-    border: 1px solid peru;
-    
 }
 
 .Normal {

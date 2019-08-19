@@ -17,6 +17,7 @@
 .ReportStartContainer {
     display: flex;
     flex-direction: row;
+    margin-bottom: 45px;
     color: black;
     justify-content: space-between;
 }
@@ -38,6 +39,18 @@
     font-family: Arial;
     font-size: 11px;
     margin-right: 15mm;
-    
+}
+
+.PageNumber {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-end;
+}
+
+.PageNumberText {
+    text-align: center;
+    color: grey;
 }
 

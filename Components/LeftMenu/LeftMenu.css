@@ -1,0 +1,14 @@
+.LeftMenu {
+    border: 1px solid grey;
+    width: 300px;
+}
+
+.SimpleBorder {
+    border: 1px solid tomato;  
+}
+
+.LeftMenuText {
+    text-align: center;
+    color: white;
+    font-size: large;
+}

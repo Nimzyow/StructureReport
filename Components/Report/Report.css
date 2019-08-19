@@ -1,0 +1,43 @@
+.Body{
+    text-align: left;
+    color: black;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.ReportHeader {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: black;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+.ReportStartContainer {
+    display: flex;
+    flex-direction: row;
+    color: black;
+    justify-content: space-between;
+}
+
+.ReportClientDetail {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-family: Arial;
+    font-size: 11px;
+    flex-direction: column;
+    margin-left: 15mm;
+}
+
+.ReportReporterDetail {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-family: Arial;
+    font-size: 11px;
+    margin-right: 15mm;
+    
+}
+

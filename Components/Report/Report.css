@@ -12,6 +12,7 @@
     color: black;
     font-family: Arial;
     font-size: 14px;
+    border: 1px solid rosybrown;
 }
 
 .ReportStartContainer {
@@ -43,14 +44,37 @@
 
 .PageNumber {
     display: flex;
+    flex-direction: row;
     flex: 1;
-    flex-direction: column;
     justify-content: center;
-    align-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 4%; 
 }
 
 .PageNumberText {
     text-align: center;
     color: grey;
+}
+
+.TableContents {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: black;
+    font-family: Arial;
+    font-size: 12px;
+    margin-left: 12%;
+    margin-top: 4%;
+}
+
+.NormalBody {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: black;
+    font-family: Arial;
+    font-size: 11px;
+    margin-left: 12%;
+    margin-top: 4%;
 }
 

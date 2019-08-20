@@ -1,0 +1,36 @@
+.HeaderContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 5%;
+    border-bottom: 1px solid black;
+}
+
+.ClientAddContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: black;
+    font-family: Arial;
+    font-size: 9px;
+    color: grey;
+}
+
+.LogoContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    align-items: flex-end;
+    margin-left: 10%;
+
+}
+
+.LogoContainerHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 10%;
+
+}

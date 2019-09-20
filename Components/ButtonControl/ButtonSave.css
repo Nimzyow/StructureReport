@@ -1,0 +1,6 @@
+.ButtonControl {
+    display: flex;
+    justify-content: center;
+    align-content: stretch;
+    margin: 10px 0px;
+}

@@ -5,7 +5,7 @@ const ReportP2 = (props) => {
     const borderStyle = {
         //border: "1px solid black",
         color: "black",
-        marginTop: "23%",
+        marginTop: "8%",
         marginLeft: "5%",
         fontFamily: "Arial",
         fontSize: "12px"

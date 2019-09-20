@@ -12,7 +12,22 @@
     color: black;
     font-family: Arial;
     font-size: 14px;
-    border: 1px solid rosybrown;
+    
+}
+
+.ReportPropertyContainer {
+    border: 1px solid wheat;
+    width: 595px;
+    height: 30px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+
+.ReportPropertyItem{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .ReportStartContainer {
@@ -75,6 +90,11 @@
     font-family: Arial;
     font-size: 11px;
     margin-left: 12%;
+    margin-right: 10%;
     margin-top: 4%;
+}
+
+.SignatureText{
+    
 }
 

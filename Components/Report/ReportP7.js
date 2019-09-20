@@ -1,11 +1,11 @@
 import React from "react";
 import "./Report.css";
 
-const ReportP3 = (props) => {
+const ReportP7 = (props) => {
     const borderStyle = {
         //border: "1px solid black",
         color: "black",
-        marginTop: "8%",
+        marginTop: "13%",
         marginLeft: "5%",
         fontFamily: "Arial",
         fontSize: "12px"
@@ -35,4 +35,4 @@ const ReportP3 = (props) => {
     )
 };
 
-export default ReportP3;
+export default ReportP7;

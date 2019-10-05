@@ -1,0 +1,125 @@
+.Text{
+    color: white;
+    font-size: medium;
+}
+
+.Header {
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
+
+.ClientListHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SmallerText{
+  font-size: small;
+  font-weight: bold;
+  color: red;
+}
+
+.App-header4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.CompCont{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.inputContainer1 {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 300px;
+  
+}
+
+.inputContainer2 {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  
+}
+
+.CustomerDataCont {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid grey;
+  margin-right: 2%;  
+  width: 330px;
+}
+
+.ClientList {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
+  border-bottom: 2px solid grey;
+  margin-right: 4%;  
+  width: 530px;
+  height: 541.33px;
+  
+}
+
+.Client {
+  display: flex;
+  align-items: center;
+  flex: 1 1 1;
+  height: 40px;
+  flex-direction: column;
+  border: 1px solid white;
+  
+}
+
+.ProjectDescriptionCont {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid grey;
+  box-shadow: 0 5px 8px #ccc;
+  width: 315px;
+  height: 241.33px;
+  flex: 1 0 auto;
+  margin-bottom: 13px;
+  background-color: #FFFFFF;
+  align-items: flex-start;
+}
+
+.Normal {
+  text-align: center;
+  color: black;
+  font-family: Arial;
+  font-size: 12px;
+}
+
+.TextInputCont{
+  width: 312px;
+  height: 441.33px;
+}
+
+.OrderButton {
+  display: flex;
+  background-color: #282C34;
+  flex: 1 1 1;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  font-family: inherit;
+  font-size: 1.2em;
+  margin-top: 2px;
+}
+
+.ClientinfoEdit{
+  display: flex;
+  flex-direction: column-reverse;
+}
+  

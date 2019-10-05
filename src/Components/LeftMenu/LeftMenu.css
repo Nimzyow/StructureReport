@@ -1,0 +1,38 @@
+.LeftMenu {
+    border-bottom: 1px solid grey;
+    width: 300px;
+}
+
+.SimpleBorder {
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+}
+
+.LeftMenuText {
+    text-align: center;
+    color: white;
+    font-size: large;
+}
+
+.Posts ul {
+    list-style: none;
+    margin:0;
+    padding: 0;
+}
+
+.Posts li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.Posts a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.Posts ul:hover,
+.Posts ul:active{
+    background-color: slategray;
+    cursor: pointer;
+}

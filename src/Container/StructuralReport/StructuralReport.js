@@ -319,6 +319,9 @@ class StructuralReport extends React.Component {
 
     return (
         <BrowserRouter>
+        <div style={{display: "flex", marginLeft:"3%", marginRight:"3%", justifyContent: "flex-start", borderBottom:"1px solid #C3CFDD"}}>
+                <h2 style={{color:"#1A3957", font: "large", fontfamily: "Arial, Helvetica, sans-serif" }}>Structural report</h2>
+            </div>
         {this.state.authUser && <Aux>
           
           <div className="VariableContainer">

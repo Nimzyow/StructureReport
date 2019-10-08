@@ -9,6 +9,10 @@
     border-left: 1px solid grey;
 }
 
+.Blues{
+    color: blue;
+}
+
 .LeftMenuText {
     text-align: center;
     color: white;
@@ -28,11 +32,21 @@
 
 .Posts a {
     text-decoration: none;
-    color: aliceblue;
+    color: aliceblue; 
 }
 
-.Posts ul:hover,
-.Posts ul:active{
-    background-color: slategray;
+.Posts ul:hover{
+    color: rgb(58, 137, 211);
     cursor: pointer;
-}
+    -webkit-transition: color 0.08s ease-out;
+    -moz-transition: color 0.08s ease-out;
+    -o-transition: color 0.08s ease-out;
+    transition: color 0.08s ease-out;
+},
+.Posts ul:active,
+.Posts ul.active{
+        color: rgb(58, 137, 211);
+        cursor: pointer;  
+    }
+
+

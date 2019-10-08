@@ -16,8 +16,9 @@ import CalculationReport from "./Container/CalculationReport/CalculationReport";
 import SignUp from "./Container/UserAuth/SignUp/SignUp";
 import SignIn from "./Container/UserAuth/SignIn/SignIn";
 import SignInAlready from "./Container/UserAuth/SignIn/SignInAlready";
+import PatchNotes from "./Container/PatchNotes/PatchNotes";
 
-import * as firebase from "firebase";
+import {auth}from "firebase";
 
 import * as ROUTES from "./Constants/Routes/Routes";
 
@@ -27,27 +28,29 @@ constructor (props) {
   this.state = {
     header: "Home",
     error: null,
-    loggedOut: false,
+    loggedOut: null,
     authUser: null,
+
+    homeActive: true,
+    structuralReportActive: false,
+    clientDataActive: false,
+    calculationReportActive: false,
+    patchNoteActive: false
   }
 }
 
 componentDidMount() {
-  firebase.auth().onAuthStateChanged(authUser => {
+  auth().onAuthStateChanged(authUser => {
     authUser
-      ? this.setState({ authUser })
-      : this.setState({ authUser: null });
+      ? this.setState({ authUser, loggedOut: false }, ()=>{console.log("loggedoutstatus= " + this.state.loggedOut)})
+      : this.setState({ authUser: null, loggedOut: true }, ()=>{console.log("loggedoutstatus= " + this.state.loggedOut)});
   });
 }
 
-componentDidUpdate() {
-  if (this.state.loggedOut === true){
-    this.loggedOutStatus();
-  }
-}
+
 
 signOutHandler = () => {
-  firebase.auth().signOut()
+  auth().signOut()
   .then((authUser) => {
     console.log("successful logout");
     this.setState({loggedOut: true})
@@ -58,7 +61,9 @@ signOutHandler = () => {
 }
 
 headerChangeHandler = (header) => {
+  console.log("headerchangehandler called")
       const newHeader = header;
+      console.log("new header is: "+newHeader)
       this.setState({
         header: newHeader
       })
@@ -73,52 +78,41 @@ loggedOutStatus = () => {
 }
 
   render(){ 
-
     let signInInter = this.state.authUser ? SignInAlready : SignIn;
 
-    let signInOut = this.state.authUser ? <p style={{color:"white"}}><Link to={ROUTES.LANDING} onClick={this.signOutHandler}>Sign out</Link></p> : <p style={{color:"white"}}><Link to={ROUTES.SIGN_IN}>Log in</Link></p> ;
+    let signOutOrIn = this.state.loggedOut ? 
+    <p style={{color: "black"}}><Link to={ROUTES.SIGN_IN}>Sign in</Link></p> : 
+    <p style={{color: "black"}} ><Link onClick={this.signOutHandler}>Sign out</Link></p>
 
     let redirecting = this.state.loggedOut ? <Redirect to={ROUTES.LANDING} /> : null;
-
     
-    
-    const borderStyle = {
-         width: "295px",
-    }
 
     return (
       <BrowserRouter>
         <div className="App-header">
-          <div className="Top-Bar">
-            <div className="LogoContainer2"> 
-            <img style={borderStyle} src={Logo} alt="Logo2"/>              
-            </div>      
-            <div className="StateSelection">
-              <p className="MainHeader">{this.state.header}</p>
-            </div>
-            <div style={{marginTop: "1px", marginRight: "8px", borderBottom: "1px solid grey"}}>
-              {signInOut}
-            </div>
-          </div>
           <div className="App-header3">
-            <div>
-              <LeftMenu authUser={this.state.authUser} />
+            <div className={"LeftMenuBackground"}>
+              <LeftMenu authUser={this.state.authUser} signOut={this.signOutHandler} />
             </div>
-            <Route path={ROUTES.LANDING} exact component={Landing} />
-            <Route path={ROUTES.HOME}  component={Home} />
-            <Route path={ROUTES.STRUCTURAL_REPORT} component={StructuralReport} />
-            <Route path={ROUTES.CUSTOMER_INFO} component={CustomerInfo} />
-            <Route path={ROUTES.CALCULATION_REPORT} component={CalculationReport} />
-            <Route path={ROUTES.SIGN_UP} component={SignUp} />
-            <Route path={ROUTES.SIGN_IN} component={signInInter} />
-            {redirecting}
-    
+            <div className="Top-Bar">
+            <div className="SignOutCont">
+              {signOutOrIn}
+            </div>
+              <Route path={ROUTES.LANDING} exact component={Landing} />
+              <Route path={ROUTES.HOME}  component={Home} />
+              <Route path={ROUTES.STRUCTURAL_REPORT} component={StructuralReport} />
+              <Route path={ROUTES.CUSTOMER_INFO} component={CustomerInfo} />
+              <Route path={ROUTES.CALCULATION_REPORT} component={CalculationReport} />
+              <Route path={ROUTES.SIGN_UP} component={SignUp} />
+              <Route path={ROUTES.SIGN_IN} component={signInInter} />
+              <Route path={ROUTES.PATCH_NOTES} component={PatchNotes} />
+              {redirecting}
+            </div>
         </div> 
-      </div>
+        </div>
     </BrowserRouter>   
     );
   }
 }
-
 
 export default App;

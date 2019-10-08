@@ -15,6 +15,7 @@ let CLIENTLISTEDITLOADED = null;
 let CLIENTLISTVIEWLOADED = null;
 let DELETESURE = null;
 let POSITIONI = 0;
+let DEVELOPMENTMODE = true;
 
 class CustomerInfo extends React.Component{
     constructor(props){
@@ -37,7 +38,7 @@ class CustomerInfo extends React.Component{
             showSpinnerClientList: true,
             localSUsed: null,
             deleteSure: false,
-            authUser: null
+            authUser: null,
         }
 
 
@@ -57,19 +58,32 @@ class CustomerInfo extends React.Component{
         //    isLoading: false,
         //}, () => {console.log("Initial fetch of storage has happened");}
     //); 
-
-    var clientDataList = database().ref("clientData/clientData");
-    clientDataList.on('value', snapshot => {
-        this.setState({
-            clientInfoList: snapshot.val(),
-            showSpinnerClientList: false,
-            authUser: true
-        }, (error) => {if (error) {
-            console.log("error has occured in componentDidMount" + error)
-        } else {
-            console.log("clientListData gathered from firebase successfully")
-        }})
-    })
+    if(!DEVELOPMENTMODE){
+        var clientDataList = database().ref("clientData/clientData");
+        clientDataList.on('value', snapshot => {
+            this.setState({
+                clientInfoList: snapshot.val(),
+                showSpinnerClientList: false,
+                authUser: true
+            }, (error) => {if (error) {
+                console.log("error has occured in componentDidMount" + error)
+            } else {
+                console.log("clientListData gathered from firebase successfully")
+            }})
+        })} else if(DEVELOPMENTMODE){
+        var clientDataListTest = database().ref("clientData/clientDataTEST");
+        clientDataListTest.on('value', snapshot => {
+            this.setState({
+                clientInfoList: snapshot.val(),
+                showSpinnerClientList: false,
+                authUser: true
+            }, (error) => {if (error) {
+                console.log("error has occured in componentDidMount" + error)
+            } else {
+                console.log("clientListData gathered from firebase successfully")
+            }})
+        })
+    }
     {/*.catch(error => {
         console.log("error at componentDidMount on retrieving clientDataList from cloud. " + error);
         this.setState({
@@ -166,7 +180,7 @@ class CustomerInfo extends React.Component{
             //}
 
             // write firebase code to save data to cloud
-
+            if (!DEVELOPMENTMODE){
             database().ref("clientData/clientData").set({
                 ...this.state.clientInfoList
               }, error => {
@@ -178,6 +192,19 @@ class CustomerInfo extends React.Component{
                   this.setState({showSpinner:false, spinnerText:"SAVED TO CLOUD", failUploadText: null, clientListSpinner: false}, () => {setTimeout(this.defaultCloudStatus, 3000);})
                 }
                 });
+            }else if (DEVELOPMENTMODE){
+                database().ref("clientData/clientDataTEST").set({
+                    ...this.state.clientInfoList
+                  }, error => {
+                    if (error) {
+                      // The write failed...
+                      console.log(error); this.setState({showSpinner: false, spinnerText:"Failed to save to cloud", failUploadText: "Error syncing to cloud. please check network", clientListSpinner: false},() => {setTimeout(this.defaultCloudStatus, 3000);})
+                    } else {
+                      console.log("Data saved successfully to cloud");
+                      this.setState({showSpinner:false, spinnerText:"SAVED TO CLOUD", failUploadText: null, clientListSpinner: false}, () => {setTimeout(this.defaultCloudStatus, 3000);})
+                    }
+                    });
+                }
 
 
             {/*axios.patch("/clientData.json", clientData)
@@ -368,8 +395,8 @@ class CustomerInfo extends React.Component{
             .catch(error => {console.log(error); this.setState({showSpinner: false, spinnerText:"Failed to save to cloud", failUploadText: "Error syncing to cloud. please check network"},() => {setTimeout(this.defaultCloudStatus, 3000);})})*/}
                 
             //below is the code to save edited client details to firebase. The logic behind sorting the client data and editing it to the correct index is all done before the lines below. We basically overwrite the whole clientdata with the new clientdata. Maybe consider only updating the specific field effected?
-
-                database().ref("clientData/clientData").set({
+            if(DEVELOPMENTMODE){
+                database().ref("clientData/clientDataTEST").set({
                     ...this.state.clientInfoList
                   }, error => {
                     if (error) {
@@ -378,7 +405,17 @@ class CustomerInfo extends React.Component{
                     } else {
                       console.log("Data edit saved successfully to cloud")
                     }
-                    });
+                    });} else if(!DEVELOPMENTMODE){
+                        database().ref("clientData/clientData").set({
+                            ...this.state.clientInfoList
+                          }, error => {
+                            if (error) {
+                              // The write failed...
+                              console.log(error); this.setState({showSpinner: false, spinnerText:"Failed to save to cloud", failUploadText: "Error syncing to cloud. please check network"},() => {setTimeout(this.defaultCloudStatus, 3000);})
+                            } else {
+                              console.log("Data edit saved successfully to cloud")
+                            }
+                            });}
                 })})
             }
             
@@ -439,7 +476,8 @@ class CustomerInfo extends React.Component{
                   // The write failed...
                   console.log(error); this.setState({showSpinner: false, spinnerText:"Failed to save to cloud", failUploadText: "Error syncing to cloud. please check network"},() => {setTimeout(this.defaultCloudStatus, 3000);})
                 } else {
-                  console.log("Data edit saved successfully to cloud")
+                  console.log("Data edit saved successfully to cloud");
+                  this.setState({showSpinner: false, spinnerText:"Saved to cloud"}, () => {setTimeout(this.defaultCloudStatus, 3000);})
                 }
                 });
             this.setState({
@@ -499,11 +537,11 @@ class CustomerInfo extends React.Component{
         for (let i = 0; i < this.state.clientInfoList.length; i++){
             clientListIsLoaded.push(
                 <div key={i} style={{display: "flex", flexDirection: "row"}}>
-                    <button style={{flex: 5}}  value={i} className="OrderButton" onClick={() => {this.displayClientInfoHandler(i);}}>
+                    <button style={{flex: 5, marginLeft:"5px"}}  value={i} className="OrderButton" onClick={() => {this.displayClientInfoHandler(i);}}>
                         {this.state.clientInfoList[i].clientFirstName + " " + this.state.clientInfoList[i].clientLastName}
                     </button>
                     <button style={{marginTop: "2px", flex: 1}} onClick={() => {this.displayClientInfoHandlerView(i)}}>View</button>
-                    <button onClick={() => {this.displayClientInfoHandler(i)}} style={{marginTop: "2px", flex: 1}}>Edit</button>
+                    <button onClick={() => {this.displayClientInfoHandler(i)}} style={{marginTop: "2px", flex: 1, marginRight:"5px"}}>Edit</button>
                 </div>
             )
         }}}
@@ -681,79 +719,106 @@ class CustomerInfo extends React.Component{
                 show={this.state.deleteSure}
                 modalClosed={this.clientCancelHandlerView}
                 >{DELETESURE}</Modal>
-            {this.state.authUser && <div style={{display: "flex", width: "100%", flexDirection: "row", justifyContent: "space-between"}}>
+            {this.state.authUser && <div style={{height: "100vh", }}>
+            <div style={{display: "flex", marginLeft:"3%", marginRight:"3%", justifyContent: "flex-start", borderBottom:"1px solid #C3CFDD"}}>
+                <h2 style={{color:"#1A3957", font: "large", fontfamily: "Arial, Helvetica, sans-serif" }}>Client info</h2>
+            </div>
                 <div className="App-header4">
                     <div className="CompCont">
                         <div className="inputContainer1">
                             <p className="Header">Enter Client Details</p>
-                            <UserInput 
-                            value={this.state.clientInfo.clientFirstName} 
-                            leftPC="First Name"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, clientFirstName: name.target.value }}, () => {console.log("First name in object: " + this.state.clientInfo.clientFirstName)})}}/>
-                            
-                            <UserInput 
-                            value={this.state.clientInfo.clientLastName} 
-                            leftPC="Last Name"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, clientLastName: name.target.value }}, () => {console.log("Last name in object: " + this.state.clientInfo.clientLastName)})}}/>
-
-                            <UserInput
-                            value={this.state.clientInfo.siteAddressFirst} 
-                            leftPC="Street"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, siteAddressFirst: name.target.value }}, () => {console.log("SAF in object: " + this.state.clientInfo.siteAddressFirst)})}}/>
-                            
-                            <UserInput 
-                            value={this.state.clientInfo.siteAddressSecond} 
-                            leftPC="City"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, siteAddressSecond: name.target.value }}, () => {console.log("SAS in object: " + this.state.clientInfo.siteAddressSecond)})}}/>
-                            
-                            <UserInput 
-                            value={this.state.clientInfo.siteAddressThird} 
-                            leftPC="County"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, siteAddressThird: name.target.value }}, () => {console.log("SAT in object: " + this.state.clientInfo.siteAddressThird)})}}/>
-                            
-                            <UserInput 
-                            value={this.state.clientInfo.siteAddressPC} 
-                            leftPC="Postcode"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, siteAddressPC: name.target.value }}, () => {console.log("SAPC in object: " + this.state.clientInfo.siteAddressPC)})}}/>
-
-                            <UserInput 
-                            value={this.state.clientInfo.tel} 
-                            leftPC="Tel"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, tel: name.target.value }}, () => {console.log("Tel in object: " + this.state.clientInfo.tel)})}}/>
-                            
-                            <UserInput 
-                            value={this.state.clientInfo.mobile} 
-                            leftPC="Mobile"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, mobile: name.target.value }}, () => {console.log("Mobile in object: " + this.state.clientInfo.mobile)})}}/>
-
-                            <UserInput 
-                            value={this.state.clientInfo.emailAdd} 
-                            leftPC="Email add"
-                            onChange={(name) => {this.setState({
-                                clientInfo: {...this.state.clientInfo, emailAdd: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.emailAdd)})}}/>
+                            <form style={{display: "flex", flexDirection: "column", width:"100%"}} >
+                                <input
+                                className={"InputGap"}
+                                name="First Name"
+                                value={this.state.clientInfo.clientFirstName}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, clientFirstName: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.clientFirstName)})}}
+                                type="text"
+                                placeholder="First Name"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="Last Name"
+                                value={this.state.clientInfo.clientLastName}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, clientLastName: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.clientLastName)})}}
+                                type="text"
+                                placeholder="Last Name"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="Street"
+                                value={this.state.clientInfo.siteAddressFirst}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, siteAddressFirst: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.siteAddressFirst)})}}
+                                type="text"
+                                placeholder="Street"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="City"
+                                value={this.state.clientInfo.siteAddressSecond}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, siteAddressSecond: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.siteAddressSecond)})}}
+                                type="text"
+                                placeholder="City"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="County"
+                                value={this.state.clientInfo.siteAddressThird}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, siteAddressThird: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.siteAddressThird)})}}
+                                type="text"
+                                placeholder="County"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="Postcode"
+                                value={this.state.clientInfo.siteAddressPC}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, siteAddressPC: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.siteAddressPC)})}}
+                                type="text"
+                                placeholder="Postcode"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="tel number"
+                                value={this.state.clientInfo.tel}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, tel: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.tel)})}}
+                                type="number"
+                                placeholder="Tel number"
+                                />
+                                <input
+                                className={"InputGap"}
+                                name="mobile"
+                                value={this.state.clientInfo.mobile}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, mobile: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.mobile)})}}
+                                type="number"
+                                placeholder="Mobile number"
+                                />
+                                <input
+                                style={{marginTop: "4px",
+                                    border: "1px solid black", marginBottom: "8px"}}
+                                name="email"
+                                value={this.state.clientInfo.emailAdd}
+                                onChange={(name) => {this.setState({
+                                    clientInfo: {...this.state.clientInfo, emailAdd: name.target.value }}, () => {console.log("email in object: " + this.state.clientInfo.emailAdd)})}}
+                                type="email"
+                                placeholder="Email Add"
+                                />
+                            </form>
                         </div>
                         <div className="inputContainer2">
                             <p className="Header">Enter Project Description</p>
                             <div className="ProjectDescriptionCont">                            
                                 <textarea className="TextInputCont" type="text" placeholder="Please enter project description" value={this.state.clientInfo.proDes} onChange={this.proDesChangeHandler} />                       
                             </div>
-                        </div>    
-                    </div>
-                    <ButtonSave isInavlid={isInvalid}  onClick={this.saveButtonHandler}/> 
-                    <div style={{display: "flex", flexDirection:"column", alignItems: "center"}}>
-                        <div>{underSaveButton}</div>
-                        <div style={{color: "red"}}>{this.state.failUploadText}</div>
-                    </div>   
-                </div>
-                    <div className="ClientList">
+                        </div> 
+                     <div className="ClientList">
                             <div className="ClientListHeader">
                                 <p className="Header">Client Information</p>
                                 <p className="SmallerText">{this.state.localSUsed}</p>
@@ -762,9 +827,17 @@ class CustomerInfo extends React.Component{
                             {clientListSpinner}
                             {clientListIsLoaded}
                         </div>
+                    </div>      
                     </div>
+                    <ButtonSave isInavlid={isInvalid}  onClick={this.saveButtonHandler}/> 
+                    <div style={{display: "flex", flexDirection:"column", alignItems: "center"}}>
+                        <div style={{color:"black"}}>{underSaveButton}</div>
+                        <div style={{color: "red"}}>{this.state.failUploadText}</div>
+                    </div>   
+                </div>
+                    
             </div>}
-            {!this.state.authUser && <div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center"}}><Spinner /><p>Loading... Please sign in if you have not signed in yet</p></div>}    
+            {!this.state.authUser && <div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center"}}><Spinner /><p style={{color:"black"}}>Loading... Please sign in if you have not signed in yet</p></div>}    
             </BrowserRouter>
         );
     }

@@ -1,0 +1,17 @@
+.Main{
+    display:flex;
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 3%;
+    margin-top: 1%;
+    color: black;
+}
+
+.PageHead{
+    border-bottom: 1px solid black;
+}
+
+.PatchLayout{
+    display: flex;
+    flex-direction: column;
+}

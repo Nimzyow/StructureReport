@@ -1,12 +1,21 @@
 .App-header {
-  background-color: #282c34;
+  background-color: #F4F4F4;
   height: 100vmax;
+  width: 100vw;
 }
 
 .App-header3 {
   display: flex;
   color: white;
   flex-direction: row;
+  background-color: #F4F4F4;
+}
+
+.LeftMenuBackground{
+  display: flex;
+  justify-content: stretch;
+  height: 100vmax;
+  background-color: #17191f;
 }
 
 .VariableContainer {
@@ -34,13 +43,21 @@
 
 .Top-Bar {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.SignOutCont{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1%;
 }
 
 .LogoContainer2 {
   display:flex;
   border-bottom: 1px solid grey;
   justify-content: center;
-  width: 303px;
+  width: 300px;
 }
 
 .StateSelection {
@@ -64,11 +81,7 @@
     color: white;
     font-size: large;
     font-weight: bold;
-    
-    
 }
-
-
 
 .Normal {
   text-align: center;

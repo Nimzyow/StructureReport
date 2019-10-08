@@ -34,10 +34,10 @@ class Home extends React.Component{
                 <div className="App-header4">
                     <div className="CompCont1">
                         <p className="Text">You have successfully logged in</p> 
-                        <p>Structural report page and Calculation page is under construction but client list is available for use.</p>
+                        <p style={{color: "black"}}>Structural report page and Calculation page is under construction but client list is available for use.</p>
                     </div>
                 </div>}
-                {!this.state.authUser && <div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center"}}><Spinner /><p>Loading... Please sign in if you have not signed in yet</p></div>}
+                {!this.state.authUser && <div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center"}}><Spinner /><p style={{color: "black"}}>Loading... Please sign in if you have not signed in yet</p></div>}
             </BrowserRouter>
             
         );

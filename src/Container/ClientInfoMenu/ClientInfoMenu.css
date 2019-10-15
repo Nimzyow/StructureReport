@@ -1,0 +1,33 @@
+.MenuWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.CompWrapper {
+    margin: 3% 3%;
+}
+.CompWrapper:hover{
+    margin: 3% 3%;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+
+.CompWrapperSelect {
+    margin: 3% 3%;
+    border-bottom: 4px solid blue;
+    border-radius: 2px;
+}
+
+.TextProp {
+    color: black;
+    font-size: medium;
+}.TextProp:hover{
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+    color: blue;
+    text-decoration: none;
+}

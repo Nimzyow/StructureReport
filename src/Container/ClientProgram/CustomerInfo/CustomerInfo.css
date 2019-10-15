@@ -1,0 +1,152 @@
+.App-header4 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.CompCont{
+  display: flex;
+  height: 400px;
+}
+
+.StartInputCont{
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px 0px 10px;
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 
+       inset 0 -3em 3em rgba(0,0,0,0.1), 
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.inputContainer2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px 0px 10px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 
+       inset 0 -3em 3em rgba(0,0,0,0.1), 
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+            }
+
+.ClientList {
+  display: flex;
+  flex-direction: column;
+  width: 330px;
+  
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 
+       inset 0 -3em 3em rgba(0,0,0,0.1), 
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+
+.Text{
+    color: black;
+    font-size: medium;
+}
+
+.Header {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.ClientListHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SmallerText{
+  font-size: small;
+  font-weight: bold;
+  color: red;
+}
+
+
+
+
+
+.InputGap{
+  margin-top: 4px;
+  border: 1px solid black;
+}
+
+
+
+
+
+.CustomerDataCont {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid grey;
+  margin-right: 2%;  
+  width: 330px;
+}
+
+
+
+.Client {
+  display: flex;
+  align-items: center;
+  flex: 1 1 1;
+  height: 40px;
+  flex-direction: column;
+  border: 1px solid white;
+  
+}
+
+.ProjectDescriptionCont {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+  margin-bottom: 3%;
+  width: 315px;
+  flex: 1 0 auto;
+  background-color: #FFFFFF;
+  align-items: flex-start;
+}
+
+.Normal {
+  text-align: center;
+  color: black;
+  font-family: Arial;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif 
+}
+
+.TextInputCont{
+  width: 100%;
+  height: 100%;
+}
+
+.OrderButton {
+  display: flex;
+  flex: 1 1 1;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  color: black;
+  border: 1px solid black;
+  font-family: inherit;
+  font-size: 1.2em;
+  margin-top: 2px;
+}
+
+.ClientinfoEdit{
+  display: flex;
+  flex-direction: column-reverse;
+}
+  

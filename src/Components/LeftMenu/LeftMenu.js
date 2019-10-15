@@ -48,27 +48,12 @@ const LeftMenuAuth = (props) => {
             </div>
             <div className="LeftMenu">
                 <div className="Posts">
-                    <header onClick={props.clientDataHead}>
-                        <nav>
-                            <Link to={ROUTES.CUSTOMER_INFO} onClick={props.topHeader}>
-                                <ul>
-                                    <li>
-                                        Client Info
-                                    </li>
-                                </ul>
-                            </Link>
-                        </nav>
-                    </header>
-                </div>
-            </div>
-            <div className="LeftMenu">
-                <div className="Posts">
                     <header >
                         <nav>
-                            <Link to={ROUTES.CALCULATION_REPORT} onClick={props.topHeader}>
+                            <Link to={ROUTES.CLIENT_PROGRAM} onClick={props.topHeader}>
                                 <ul>
                                     <li>
-                                        Calculation Report
+                                        Client Program
                                     </li>
                                 </ul>
                             </Link>

@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import "../src/Components/Report/Report.css";
 
-import Logo from "./Assets/ce_logo_header.png"
-
 import LeftMenu from "./Components/LeftMenu/LeftMenu";
 
 import { BrowserRouter, Route, Link, Redirect  } from "react-router-dom";
@@ -11,8 +9,8 @@ import { BrowserRouter, Route, Link, Redirect  } from "react-router-dom";
 import Home from "./Container/Home/Home";
 import Landing from "./Container/Landing/Landing";
 import StructuralReport from "./Container/StructuralReport/StructuralReport";
-import CustomerInfo from "./Container/CustomerInfo/CustomerInfo";
-import CalculationReport from "./Container/CalculationReport/CalculationReport";
+import CustomerInfo from "./Container/ClientProgram/CustomerInfo/CustomerInfo";
+import ClientProgram from "./Container/ClientProgram/ClientProgram";
 import SignUp from "./Container/UserAuth/SignUp/SignUp";
 import SignIn from "./Container/UserAuth/SignIn/SignIn";
 import SignInAlready from "./Container/UserAuth/SignIn/SignInAlready";
@@ -46,8 +44,6 @@ componentDidMount() {
       : this.setState({ authUser: null, loggedOut: true }, ()=>{console.log("loggedoutstatus= " + this.state.loggedOut)});
   });
 }
-
-
 
 signOutHandler = () => {
   auth().signOut()
@@ -86,7 +82,6 @@ loggedOutStatus = () => {
 
     let redirecting = this.state.loggedOut ? <Redirect to={ROUTES.LANDING} /> : null;
     
-
     return (
       <BrowserRouter>
         <div className="App-header">
@@ -95,20 +90,19 @@ loggedOutStatus = () => {
               <LeftMenu authUser={this.state.authUser} signOut={this.signOutHandler} />
             </div>
             <div className="Top-Bar">
-            <div className="SignOutCont">
-              {signOutOrIn}
-            </div>
+              <div className="SignOutCont">
+                {signOutOrIn}
+              </div>
               <Route path={ROUTES.LANDING} exact component={Landing} />
               <Route path={ROUTES.HOME}  component={Home} />
               <Route path={ROUTES.STRUCTURAL_REPORT} component={StructuralReport} />
-              <Route path={ROUTES.CUSTOMER_INFO} component={CustomerInfo} />
-              <Route path={ROUTES.CALCULATION_REPORT} component={CalculationReport} />
+              <Route path={ROUTES.CLIENT_PROGRAM} component={ClientProgram} />
               <Route path={ROUTES.SIGN_UP} component={SignUp} />
               <Route path={ROUTES.SIGN_IN} component={signInInter} />
               <Route path={ROUTES.PATCH_NOTES} component={PatchNotes} />
               {redirecting}
             </div>
-        </div> 
+          </div> 
         </div>
     </BrowserRouter>   
     );
